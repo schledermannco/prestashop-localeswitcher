@@ -50,14 +50,14 @@ class LocaleSwitcher extends Module {
     
 
     public function install() {
-        if ( !parent::install() === false || !$this->registerHook('displayTop') )   
+        if ( !parent::install() === false || !$this->registerHook('displayNav2') )   
         {
             return false;
         } 
         return true;
     }
 
-    public function hookDisplayTop($params) {  
+    public function hookDisplayNav2($params) {  
         $languages = Language::getLanguages(true);
         $this->context->smarty->assign(
             array(
