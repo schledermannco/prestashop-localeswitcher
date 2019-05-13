@@ -70,6 +70,7 @@ class LocaleSwitcher extends Module {
                 'languages'  => $languages,
                 'currencies' => $currencies
                 'default_language' => $this->context->employee->id_lang,
+                'default_currency'  => Currency::getCurrencyInstance(Configuration::get('PS_CURRENCY_DEFAULT')) 
             )
         );
         return $this->display(__FILE__, 'views/templates/hook/localeswitcher.tpl');
