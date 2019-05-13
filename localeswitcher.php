@@ -57,7 +57,7 @@ class LocaleSwitcher extends Module {
         return true;
     }
 
-    public function hookDisplayTopExtra($params) {  
+    public function hookDisplayTop($params) {  
         $languages = Language::getLanguages(true);
         $this->context->smarty->assign(
             array(
