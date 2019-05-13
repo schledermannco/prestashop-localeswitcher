@@ -50,23 +50,21 @@ class LocaleSwitcher extends Module {
     
 
     public function install() {
-        if ( !parent::install() === false || !$this->registerHook('displayHeader') )   
+        if ( !parent::install() === false || !$this->registerHook('displayTop') )   
         {
             return false;
         } 
         return true;
     }
 
-    public function hookDisplayAdminProductsExtra($params) {  
-        $product = new Product($params['id_product']);
+    public function hookDisplayTopExtra($params) {  
         $languages = Language::getLanguages(true);
-        $this->context->smarty->assign(array(
-            'tbeventid' => $product->tbeventid,
-            'tbticketid' => $product->tbticketid,
-            'languages' => $languages,
-            'default_language' => $this->context->employee->id_lang,
+        $this->context->smarty->assign(
+            array(
+                'languages' => $languages,
+                'default_language' => $this->context->employee->id_lang,
             )
-           );
-        return $this->display(__FILE__, 'views/templates/hook/ticketbutler.tpl');
+        );
+        return $this->display(__FILE__, 'views/templates/hook/localeswitcher.tpl');
     }
 }
