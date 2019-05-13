@@ -59,7 +59,7 @@ class LocaleSwitcher extends Module {
 
     public function uninstall() { 
  
-        return parent::uninstall() $this->unregisterHook('DisplayNav2');
+        return parent::uninstall() && $this->unregisterHook('DisplayNav2');
     }
 
     public function hookDisplayNav2($params) {  
