@@ -57,6 +57,11 @@ class LocaleSwitcher extends Module {
         return true;
     }
 
+    public function uninstall() { 
+ 
+        return parent::uninstall() $this->unregisterHook('DisplayNav2');
+    }
+
     public function hookDisplayNav2($params) {  
         $languages = Language::getLanguages(true);
         $this->context->smarty->assign(
