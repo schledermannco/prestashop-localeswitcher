@@ -68,8 +68,8 @@ class LocaleSwitcher extends Module {
         $this->context->smarty->assign(
             array(
                 'languages'  => $languages,
-                'currencies' => $currencies
-                'default_language' => $this->context->employee->id_lang,
+                'currencies' => $currencies,
+                'default_language' => Configuration::get('PS_LANG_DEFAULT'),
                 'default_currency'  => Currency::getCurrencyInstance(Configuration::get('PS_CURRENCY_DEFAULT')) 
             )
         );
