@@ -64,9 +64,11 @@ class LocaleSwitcher extends Module {
 
     public function hookDisplayNav2($params) {  
         $languages = Language::getLanguages(true);
+        $currencies = Currency::getCurrencies(true);
         $this->context->smarty->assign(
             array(
-                'languages' => $languages,
+                'languages'  => $languages,
+                'currencies' => $currencies
                 'default_language' => $this->context->employee->id_lang,
             )
         );
