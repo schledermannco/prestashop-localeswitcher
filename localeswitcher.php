@@ -50,7 +50,7 @@ class LocaleSwitcher extends Module {
     
 
     public function install() {
-        if (parent::install() === false) 
+        if ( !parent::install() === false || $this->registerHook('displayHeader') )   
         {
             return false;
         } 
