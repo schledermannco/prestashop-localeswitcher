@@ -26,16 +26,18 @@
  * @author    San & Johan
  *  
  */
+use PrestaShop\PrestaShop\Adapter\ObjectPresenter;
 
 if (!defined('_PS_VERSION_')) {
     die(header('HTTP/1.0 404 Not Found'));
 }
 
 class LocaleSwitcher extends Module {
+    private $templateFile;
 
-	public function __construct() {
-		$this->name = 'llocaleswitcher';
-        $this->tab = 'administration';
+    public function __construct() {
+        $this->name = 'localeswitcher';
+        $this->tab = 'front_office_features';
         $this->author = 'Johan & San';
         $this->version = '1.0';
         $this->need_instance = 0;
@@ -45,12 +47,17 @@ class LocaleSwitcher extends Module {
  
         $this->displayName = $this->l('Locale Switcher');
         $this->description = $this->l('Adds alternative to language and currency switcher');
+
+        $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
+
         $this->ps_versions_compliancy = array('min' => '1.7.1', 'max' => _PS_VERSION_);
+
+        $this->templateFile = 'module:localeswitcher/views/templates/hook/localeswitcher.tpl';
     }
     
 
     public function install() {
-        if ( !parent::install() === false || !$this->registerHook('displayNav2') )   
+        if ( !parent::install() ||  !$this->registerHook('displayHeader')  || !$this->registerHook('displayNav2') || !$this->registerHook('actionAdminCurrenciesControllerSaveAfter') )   
         {
             return false;
         } 
@@ -59,20 +66,114 @@ class LocaleSwitcher extends Module {
 
     public function uninstall() { 
  
-        return parent::uninstall() && $this->unregisterHook('DisplayNav2');
+        return parent::uninstall() && $this->unregisterHook('displayHeader') && $this->unregisterHook('DisplayNav2') && $this->unregisterHook('actionAdminCurrenciesControllerSaveAfter');
     }
 
-    public function hookDisplayNav2($params) {  
-        $languages = Language::getLanguages(true);
-        $currencies = Currency::getCurrencies(true);
-        $this->context->smarty->assign(
-            array(
-                'languages'  => $languages,
-                'currencies' => $currencies,
-                'default_language' => Configuration::get('PS_LANG_DEFAULT'),
-                'default_currency'  => Currency::getCurrencyInstance(Configuration::get('PS_CURRENCY_DEFAULT')) 
+    public function hookActionAdminCurrenciesControllerSaveAfter($params) {
+        return parent::_clearCache($this->templateFile);
+    }
+
+     public function hookDisplayHeader()
+    {
+        $this->context->controller->addCSS($this->_path . 'css/localeswitcher.css', 'all');
+    }
+
+    public function hookDisplayNav2($params) { 
+
+            $current_currency = null;
+            $serializer = new ObjectPresenter;
+            $currencies = array_map(
+            function ($currency) use ($serializer, &$current_currency) {
+                $currencyArray = $serializer->present($currency);
+
+                // serializer doesn't see 'sign' because it is not a regular
+                // ObjectModel field.
+                $currencyArray['sign'] = $currency->sign;
+
+                $url = $this->context->link->getLanguageLink($this->context->language->id);
+
+                $extraParams = array(
+                    'SubmitCurrency' => 1,
+                    'id_currency' => $currency->id
+                );
+
+                $partialQueryString = http_build_query($extraParams);
+                $separator = empty(parse_url($url)['query']) ? '?' : '&';
+
+                $url .= $separator . $partialQueryString;
+
+                $currencyArray['url'] = $url;
+
+                if ($currency->id === $this->context->currency->id) {
+                    $currencyArray['current'] = true;
+                    $current_currency = $currencyArray;
+                } else {
+                    $currencyArray['current'] = false;
+                }
+
+                return $currencyArray;
+            },
+            Currency::getCurrencies(true, true)
+        );
+
+
+          if (Configuration::isCatalogMode() || !Currency::isMultiCurrencyActivated()) {
+             $this->smarty->assign(array(
+            'multicurrency' => 0
+        ));
+        } else {
+
+        $this->smarty->assign(array(
+            'currencies' => $currencies,
+            'current_currency' => $current_currency
+        ));
+
+        
+        }
+
+
+
+        $languages = Language::getLanguages(true, $this->context->shop->id);
+
+        foreach ($languages as &$lang) {
+            $lang['name_simple'] =  preg_replace('/\s\(.*\)$/', '', $lang['name']);
+        }
+ 
+
+        if (1 < count($languages)) {
+           $this->context->smarty->assign(
+            array(  
+                'languages' => $languages,
+                'current_language' => array(
+                'id_lang' => $this->context->language->id,
+                'name' => $this->context->language->name,
+                'name_simple' => preg_replace('/\s\(.*\)$/', '', $this->context->language->name)
+            ) 
             )
         );
-        return $this->display(__FILE__, 'views/templates/hook/localeswitcher.tpl');
+
+        } else {
+            
+                $this->smarty->assign(array(
+            'multilanguage' => 0
+        ));
+
+        }
+         
+            return $this->fetch($this->templateFile);
+
     }
+
+
+
+
+ 
+ 
+
+  
+
+
+
+
+
 }
