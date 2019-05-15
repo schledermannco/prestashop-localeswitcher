@@ -2,14 +2,18 @@
         <div class="localeswitcher_switcher_container">
             <label for="language">{l s='language' mod='Modules.localeswitcher'}</label>
             <select name="" class="p-selector chosen-select" id="language">
-                <option value="DA">{l s='danish' mod='Modules.localeswitcher'}</option>   // Do they come from elsewere
-                <option value="EN">{l s='english' mod='Modules.localeswitcher'}</option>  //
+                
+                {foreach from=$languages item=language}
+                 	<option value="{$language.id_lang}">{$language.name_simple}</option>
+                	
+                {/foreach}
+                
             </select>
             <label for="currency">{l s='currency' mod='Modules.localeswitcher'}</label>
             <select name="" class="p-selector chosen-select" id="currency">
-                <option value="DKK"></option>
-                <option value="EUR">EURO</option>
-                <option value="SEK">SEK</option>
+                {foreach from=$currencies item=currency}
+                <option value="{$currency.id}">{$currency.iso_code} {$currency.sign}</option>
+                {/foreach}
             </select>           
         </div>
         <div class="localeswitcher_action_container">
