@@ -17,7 +17,7 @@
     display: none;
 }
 
-.localeswitcher_toggle:hover .localeswitcher_container {
+.localeswitcher_toggle:hover .localeswitcher_dropdown {
     display: block;
 }
 
