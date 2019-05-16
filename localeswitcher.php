@@ -76,6 +76,7 @@ class LocaleSwitcher extends Module {
      public function hookDisplayHeader()
     {
         $this->context->controller->addCSS($this->_path . 'css/localeswitcher.css', 'all');
+        $this->context->controller->addJS($this->_path . 'js/localeswitcher.js', 'all');
     }
 
     public function hookDisplayNav2($params) { 

@@ -15,10 +15,13 @@
 
 .localeswitcher_dropdown {
     display: none;
+    transition: height 0.3s ease;
+    height: 3rem;
 }
 
-.localeswitcher_toggle:hover .localeswitcher_dropdown {
+.opened {
     display: block;
+    height: 250px;
 }
 
 .localeswitcher_container {
