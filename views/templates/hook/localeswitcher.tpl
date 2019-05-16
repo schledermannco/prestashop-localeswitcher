@@ -1,9 +1,9 @@
- <div id="localeswitcher" class="dropdown">
-    <button class="localeswitcher dropdown-toggle" type="button" id="localeSwitcherButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ <div id="localeswitcher">
+    <span class="localeswitcher localeswitcher-toggle" id="localeSwitcherButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <img src="/upload/SC-Web-Icons_globe.png" alt="Change language">
-    </button>
+    </span>
     
-    <div class="dropdown-menu localeswitcher_container" aria-labelledby="localeSwitcherButton">
+    <div class="localeswitcher-dropdown localeswitcher_container" aria-labelledby="localeSwitcherButton">
         <div clas="localswitcher_switcher_container">
             <label for="language">{l s='language' mod='Modules.localeswitcher'}</label>
             <select name="" class="p-selector chosen-select" id="language"> 
