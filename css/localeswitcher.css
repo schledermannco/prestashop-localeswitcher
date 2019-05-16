@@ -14,9 +14,12 @@
 }
 
 .localeswitcher_dropdown {
-    display: none;
+    height: 0;
     transition: height 0.3s ease;
-    height: 3rem;
+    position: absolute;
+    width: 340px;
+    z-index: 9999;
+
 }
 
 .opened {
@@ -27,10 +30,9 @@
 .localeswitcher_container {
     border: 1px solid #85744e;
     background: #f1f1f3;
-    width: 340px;
+    width: 100%;
     color: #000;
-    position: absolute;
-    z-index: 9999;
+    
 }
 
 .localswitcher_switcher_container {
