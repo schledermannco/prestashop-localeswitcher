@@ -1,6 +1,6 @@
-.localeswitcher-wrapper {
+
+.localeswitcher {
     display: inline-flex;
-    background: #ebebeb;
     height: 3rem;
     padding: .75rem;
     margin-left: .9375rem;
@@ -8,7 +8,7 @@
     white-space: nowrap;
 }
 
-.localeswitcher {
+.localeswitcher_container {
     border: 1px solid #85744e;
     background: #f1f1f3;
     width: 340px;
