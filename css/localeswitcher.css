@@ -8,6 +8,19 @@
     white-space: nowrap;
 }
 
+.localeswitcher_toggle {
+    color: #000;
+    cursor: pointer;
+}
+
+.localeswitcher_dropdown {
+    display: none;
+}
+
+.localeswitcher_toggle:hover .localeswitcher_container {
+    display: block;
+}
+
 .localeswitcher_container {
     border: 1px solid #85744e;
     background: #f1f1f3;
