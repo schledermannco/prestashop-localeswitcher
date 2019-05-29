@@ -80,6 +80,19 @@ class LocaleSwitcher extends Module {
     }
 
     public function hookDisplayNav2($params) { 
+    
+           if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['localeswitcher'])) {
+                     $url_submit = $this->context->link->getLanguageLink($_GET['language']); 
+                     $extraParams = array(
+                    'SubmitCurrency' => 1,
+                    'id_currency' => $_GET['currency']
+                );
+
+                $partialQueryString = http_build_query($extraParams);
+                $separator = empty(parse_url($url_submit)['query']) ? '?' : '&';
+                $url_submit .= $separator . $partialQueryString;
+                Tools::redirect($url_submit);
+           }
 
             $current_currency = null;
             $serializer = new ObjectPresenter;
@@ -145,6 +158,8 @@ class LocaleSwitcher extends Module {
            $this->context->smarty->assign(
             array(  
                 'languages' => $languages,
+                'selected_currency' => $this->context->currency->id,
+                'selected_language' => $this->context->language->id,
                 'current_language' => array(
                 'id_lang' => $this->context->language->id,
                 'name' => $this->context->language->name,
