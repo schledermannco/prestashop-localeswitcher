@@ -57,7 +57,7 @@ class LocaleSwitcher extends Module {
     
 
     public function install() {
-        if ( !parent::install() ||  !$this->registerHook('displayHeader')  || !$this->registerHook('displayNav2') || !$this->registerHook('actionAdminCurrenciesControllerSaveAfter') )   
+        if ( !parent::install() ||  !$this->registerHook('displayHeader')  || !$this->registerHook('displayNav1') || !$this->registerHook('actionAdminCurrenciesControllerSaveAfter') )   
         {
             return false;
         } 
@@ -66,7 +66,7 @@ class LocaleSwitcher extends Module {
 
     public function uninstall() { 
  
-        return parent::uninstall() && $this->unregisterHook('displayHeader') && $this->unregisterHook('DisplayNav2') && $this->unregisterHook('actionAdminCurrenciesControllerSaveAfter');
+        return parent::uninstall() && $this->unregisterHook('displayHeader') && $this->unregisterHook('DisplayNav1') && $this->unregisterHook('actionAdminCurrenciesControllerSaveAfter');
     }
 
     public function hookActionAdminCurrenciesControllerSaveAfter($params) {
@@ -79,7 +79,7 @@ class LocaleSwitcher extends Module {
         $this->context->controller->addJS($this->_path . 'js/localeswitcher.js', 'all');
     }
 
-    public function hookDisplayNav2($params) { 
+    public function hookDisplayNav1($params) { 
     
            if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['localeswitcher'])) {
                      $url_submit = $this->context->link->getLanguageLink($_GET['language']); 
@@ -91,6 +91,9 @@ class LocaleSwitcher extends Module {
                 $partialQueryString = http_build_query($extraParams);
                 $separator = empty(parse_url($url_submit)['query']) ? '?' : '&';
                 $url_submit .= $separator . $partialQueryString;
+                $url_submit = str_replace("&localeswitcher=1","", $url_submit);
+           
+          
                 Tools::redirect($url_submit);
            }
 
