@@ -146,11 +146,20 @@ background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' wi
 		padding: 0;
 	}
 
-/* #localeswitcher.open .localeswitcher_dropdown {
-    display: block;
-    height: 309px;
-    transition: height 0.3s ease-in-out;
-} */
+#localeswitcher select {
+	width: 100%;
+	border: 1px solid #B7B7B7;
+	height: auto;
+	line-height: 9px;
+	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11.726' height='5.901' viewBox='0 0 11.726 5.901'%3E%3Cpath d='M0,0,5.534,4.859,11.067,0' transform='translate(0.33 0.376)' fill='none' stroke='%23857548' stroke-width='1'/%3E%3C/svg%3E%0A") no-repeat right .75rem center/8px 5px;
+	text-align: left;
+	padding: 12px;
+	font-family: "Trade Gothic LT Std";
+	font-size: 11px;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	color: #857548;
+}
 
 	.localeswitcher_dropdown {
 		left: 50%;
