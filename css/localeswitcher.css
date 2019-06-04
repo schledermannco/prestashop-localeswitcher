@@ -83,6 +83,7 @@ background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' wi
 	left: 15px;
 }
 
+
 .opening {
     display: block;
     height: 309px;
@@ -132,4 +133,26 @@ background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' wi
 .localeswitcher_btn:hover {
     background: #B7DBE5;
 	border: 1px solid #B7DBE5;
+}
+
+
+@media (max-width: 575.98px) {
+	#localeswitcher {
+		position: absolute;
+		top: 7px;
+		left: 50px;
+		width: 18px;
+		height: 18px;
+		padding: 0;
+	}
+
+/* #localeswitcher.open .localeswitcher_dropdown {
+    display: block;
+    height: 309px;
+    transition: height 0.3s ease-in-out;
+} */
+
+.localeswitcher_dropdown {
+	left: calc(-50vw + 155px);
+}
 }
