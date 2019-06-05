@@ -11,7 +11,7 @@
 .localeswitcher_container label {
 	font-family: 'Trade Gothic LT Std Regular';
 	color: #707070;
-	font-size: 11px;
+	font-size: 12px;
 	margin-bottom: 10px;
 	line-height: 9px;
 }
@@ -30,7 +30,7 @@ background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' wi
 	text-align: left;
 	padding: 12px;
 	font-family: "Trade Gothic LT Std";
-	font-size: 11px;
+	font-size: 13px;
 }
 
 .localeswitcher_container .chosen-container-single .chosen-single, .localeswitcher_container .chosen-container-single .chosen-drop {
@@ -51,7 +51,7 @@ background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' wi
 	text-align: left;
 	border: 1px solid #ffffff !important;
 	color: #857548;
-	font-size: 11px;
+	font-size: 12px;
 	
 }
 
@@ -156,9 +156,14 @@ background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' wi
 	padding: 12px;
 	font-family: "Trade Gothic LT Std";
 	font-size: 11px;
+	text-transform: uppercase;
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	color: #857548;
+}
+
+#localeswitcher select option {
+	text-transform: uppercase;
 }
 
 @media (max-width: 575.98px) {

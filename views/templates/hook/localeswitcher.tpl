@@ -12,7 +12,7 @@
                     	<label for="language">{l s='language' mod='Modules.localeswitcher'}</label>
                    		<select name="language" class="p-selector chosen-select" id="language"> 
                         	{foreach from=$languages item=language}
-                            	<option value="{$language.id_lang}" {if $selected_language == $language.id_lang} selected {/if}>{$language.name_simple}</option>
+                            	<option value="{$language.id_lang}" {if $selected_language == $language.id_lang} selected {/if}>{$language.name_simple|upper}</option>
                         	{/foreach}       
                     	</select>
                     </div>
@@ -21,7 +21,7 @@
                     	<label for="currency">{l s='currency' mod='Modules.localeswitcher'}</label>
                     	<select name="currency" class="p-selector chosen-select" id="currency">
                         	{foreach from=$currencies item=currency}
-                            	<option value="{$currency.id}" {if $selected_currency == $currency.id} selected {/if}>{$currency.iso_code} {$currency.sign}</option>
+                            	<option value="{$currency.id}" {if $selected_currency == $currency.id} selected {/if}>{$currency.iso_code|upper} {$currency.sign|upper}</option>
                         	{/foreach}
                     	</select>
                     </div>
