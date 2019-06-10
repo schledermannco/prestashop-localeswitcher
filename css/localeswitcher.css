@@ -17,7 +17,7 @@
 }
 
 .localeswitcher_container .select-wrapper {
-	margin-bottom: 25px;
+	margin-bottom: 20px;
 }
 
 .localeswitcher_container .chosen-container-single .chosen-single {
@@ -182,4 +182,20 @@ background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' wi
     	position: fixed;
      	top: 55px;
 	}
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+#localeswitcher {
+    display: inline-block;
+    position: absolute;
+    left: 61px;
+    top: 7px;
+}
+.localeswitcher_dropdown {
+    top: 44px;
+    left: -47px;
+}
+
+
 }
